@@ -1,16 +1,11 @@
 ﻿using System;
-using CMS.DocumentEngine;
-using CMS.MediaLibrary;
+using CMS.DataEngine;
 
 namespace DeleteAgency.Kentico12.ImageMagick.Events
 {
     public class ImageMagickImageOptimizerEventArgs : EventArgs
     {
-        public MediaFileInfo MediaFile { get; set; }
-
-        public AttachmentHistoryInfo PageAttachmentVersion { get; set; }
-
-        public AttachmentInfo PageAttachment { get; set; }
+        public BaseInfo Image { get; set; }
 
         public bool CancelImageOptimization { get; set; }
 

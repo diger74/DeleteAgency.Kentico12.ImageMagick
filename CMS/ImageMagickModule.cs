@@ -47,6 +47,9 @@ namespace DeleteAgency.Kentico12.ImageMagick
             AttachmentInfo.TYPEINFO.Events.Insert.Before += AttachmentOnBeforeSave;
             AttachmentInfo.TYPEINFO.Events.Update.Before += AttachmentOnBeforeSave;
 
+            MetaFileInfo.TYPEINFO.Events.Insert.Before += MetaFileOnBeforeSave;
+            MetaFileInfo.TYPEINFO.Events.Update.Before += MetaFileOnBeforeSave;
+
             AttachmentHistoryInfo.TYPEINFO.Events.Insert.Before += AttachmentOnBeforeSave;
 
             EventLogProvider.LogInformation("ImageMagick", "MODULESTART");
@@ -99,6 +102,17 @@ namespace DeleteAgency.Kentico12.ImageMagick
             {
                 var optimizer = new ImageMagickImageOptimizer(SiteContext.CurrentSiteName);
                 optimizer.Optimize(image);
+            }
+        }
+
+        private void MetaFileOnBeforeSave(object sender, ObjectEventArgs e)
+        {
+            if (e.Object == null) return;
+
+            if (e.Object is MetaFileInfo metaFile)
+            {
+                var optimizer = new ImageMagickImageOptimizer(SiteContext.CurrentSiteName);
+                optimizer.Optimize(metaFile);
             }
         }
     }
